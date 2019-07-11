@@ -97,7 +97,7 @@ func (p *Plugin) Allocate(ctx context.Context, r *pluginapi.AllocateRequest) (*p
 
 	requestLen := len(r.GetContainerRequests())
 	containerResponses := make([]*pluginapi.ContainerAllocateResponse, requestLen, requestLen)
-	for i := 0; i < dummyDeviceCount; i++ {
+	for i := 0; i < requestLen; i++ {
 		deviceSpec := []*pluginapi.DeviceSpec{
 			&pluginapi.DeviceSpec{
 				HostPath:      rdmaDeviceDir,
@@ -150,7 +150,7 @@ func main() {
 	// this is also needed to enable glog usage in dpm
 	flag.Parse()
 
-	//set the flag for stderr to true b/c or image is a scratch
+	//set the flag glog (used in dpm) for stderr to true b/c or image is a scratch
 	//if not set to true, than it will write to a file, which scratch image does not have
 	flag.Set("logtostderr", "true")
 
