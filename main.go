@@ -8,6 +8,7 @@ package main
 // Kubernetes (k8s) device plugin to enable registration of AMD GPU to a container cluster
 
 import (
+	"flag"
 	"fmt"
 	"log"
 
@@ -135,12 +136,8 @@ func (l *Lister) GetResourceNamespace() string {
 // used, it should check whether the channel is closed, i.e. Discover should stop.
 func (l *Lister) Discover(pluginListCh chan dpm.PluginNameList) {
 	//make a bunch of dummy devices
-	availableDevices := make([]string, dummyDeviceCount, dummyDeviceCount)
-	for di := range availableDevices {
-		availableDevices[di] = fmt.Sprintf("Device-%d", di)
-	}
-	log.Printf("Discovered %d dummy devices\n", dummyDeviceCount)
-	pluginListCh <- availableDevices
+	log.Printf("Discovered 1 socket for grpc\n")
+	pluginListCh <- []string{"sriov.sock"}
 }
 
 // NewPlugin instantiates a plugin implementation. It is given the last name of the resource,
@@ -151,6 +148,8 @@ func (l *Lister) NewPlugin(resourceLastName string) dpm.PluginInterface {
 }
 
 func main() {
+	// this is also needed to enable glog usage in dpm
+	flag.Parse()
 	log.Println("RDMA Dummy Device Plugin Starting Up...")
 	l := Lister{}
 	manager := dpm.NewManager(&l)
