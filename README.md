@@ -19,7 +19,7 @@ VERSION=latest ./build_docker.sh
 
 Simply run the following command on your master node in Kubernetes:
 ```
-kubectl create -f rdma-dummy-dp.yaml
+kubectl create -f rdma-dummy-dp-ds.yaml
 ```
 
 ## Usage in Kubernetes YAML
