@@ -12,3 +12,5 @@ WORKDIR /bin
 COPY --from=builder /go/src/github.com/swrap/rdma-dummy-device-plugin .
 
 CMD ["./app"]
+
+# CMD "./app -logtostderr=true"

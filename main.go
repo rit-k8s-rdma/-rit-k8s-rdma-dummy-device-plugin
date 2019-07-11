@@ -125,7 +125,7 @@ type Lister struct{}
 // GetResourceNamespace must return namespace (vendor ID) of implemented Lister. e.g. for
 // resources in format "color.example.com/<color>" that would be "color.example.com".
 func (l *Lister) GetResourceNamespace() string {
-	return "rdma-sriov.com"
+	return "rdma-sriov"
 }
 
 // Discover notifies manager with a list of currently available resources in its namespace.
@@ -135,9 +135,8 @@ func (l *Lister) GetResourceNamespace() string {
 // dynamic, it could block and pass a new list each times resources changed. If blocking is
 // used, it should check whether the channel is closed, i.e. Discover should stop.
 func (l *Lister) Discover(pluginListCh chan dpm.PluginNameList) {
-	//make a bunch of dummy devices
 	log.Printf("Discovered 1 socket for grpc\n")
-	pluginListCh <- []string{"sriov.sock"}
+	pluginListCh <- []string{"vf"}
 }
 
 // NewPlugin instantiates a plugin implementation. It is given the last name of the resource,
@@ -150,6 +149,11 @@ func (l *Lister) NewPlugin(resourceLastName string) dpm.PluginInterface {
 func main() {
 	// this is also needed to enable glog usage in dpm
 	flag.Parse()
+
+	//set the flag for stderr to true b/c or image is a scratch
+	//if not set to true, than it will write to a file, which scratch image does not have
+	flag.Set("logtostderr", "true")
+
 	log.Println("RDMA Dummy Device Plugin Starting Up...")
 	l := Lister{}
 	manager := dpm.NewManager(&l)
