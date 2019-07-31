@@ -21,7 +21,7 @@ spec:
       - key: CriticalAddonsOnly
         operator: Exists
       containers:
-      - image: rdma-dummy-dp:latest
+      - image: ritk8srdma/rdma-dummy-dp-ds:latest
         name: rdma-dummy-dp
         imagePullPolicy: IfNotPresent
         securityContext:
