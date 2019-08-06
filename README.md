@@ -1,6 +1,6 @@
 # rdma-dummy-device-plugin
 
-This device plugin is a dummy plugin. It 
+This device plugin is a dummy plugin. It gives containers requiring RDMA access to the `/dev/infiniband` directory
 
 ## Build
 To build simply run:
