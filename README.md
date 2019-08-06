@@ -27,5 +27,5 @@ To include it in the yaml file, make sure to add the following under the contain
 ```
 resources:
     limits:
-        rdma-sriov/vf: 1
+        rdma-sriov/dev-infiniband-mount: 1
 ```
