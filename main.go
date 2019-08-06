@@ -136,7 +136,7 @@ func (l *Lister) GetResourceNamespace() string {
 // used, it should check whether the channel is closed, i.e. Discover should stop.
 func (l *Lister) Discover(pluginListCh chan dpm.PluginNameList) {
 	log.Printf("Discovered 1 socket for grpc\n")
-	pluginListCh <- []string{"vf"}
+	pluginListCh <- []string{"dev-infiniband-mount"}
 }
 
 // NewPlugin instantiates a plugin implementation. It is given the last name of the resource,
